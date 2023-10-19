@@ -1,0 +1,1231 @@
+WebAPI:
+
+1. CalDemo1
+  calculatorController
+
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using System;
+
+namespace CalDemo1.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CalculatorController : ControllerBase
+    {
+        [HttpGet]
+        [Route("api/math/add")]
+        [EnableCors("AllowOrigin")]
+        public double Add(double num1, double num2)
+        {
+            return num1 + num2;
+        }
+
+        [HttpGet]
+        [Route("api/math/subtract")]
+        [EnableCors("AllowOrigin")]
+        public double Subtract(double num1, double num2)
+        {
+            return num1 - num2;
+        }
+
+        [HttpGet]
+        [Route("api/math/multiply")]
+        [EnableCors("AllowOrigin")]
+        public double Multiply(double num1, double num2)
+        {
+            return num1 * num2;
+        }
+
+        [HttpGet]
+        [Route("api/math/divide")]
+        [EnableCors("AllowOrigin")]
+        public double Divide(double num1, double num2)
+        {
+            if (num2 == 0)
+            {
+                throw new DivideByZeroException("Division by zero is not allowed.");
+            }
+            return num1 / num2;
+        }
+
+        [HttpGet]
+        [Route("api/math/square-root")]
+        [EnableCors("AllowOrigin")]
+        public double SquareRoot(double num)
+        {
+            if (num < 0)
+            {
+                throw new ArgumentException("Square root of a negative number is not allowed.");
+            }
+            return Math.Sqrt(num);
+        }
+        [HttpGet]
+        [Route("api/math/sine")]
+        [EnableCors("AllowOrigin")]
+        public double Sine(double angleInDegrees)
+        {
+            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
+            return Math.Sin(angleInRadians);
+        }
+
+        [HttpGet]
+        [Route("api/math/cosine")]
+        [EnableCors("AllowOrigin")]
+        public double Cosine(double angleInDegrees)
+        {
+            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
+            return Math.Cos(angleInRadians);
+        }
+
+        [HttpGet]
+        [Route("api/math/tangent")]
+        [EnableCors("AllowOrigin")]
+        public double Tangent(double angleInDegrees)
+        {
+            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
+            return Math.Tan(angleInRadians);
+        }
+        [HttpGet]
+        [Route("api/math/cotangent")]
+        [EnableCors("AllowOrigin")]
+        public double Cotangent(double angleInDegrees)
+        {
+            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
+            return 1 / Math.Tan(angleInRadians);
+        }
+
+        [HttpGet]
+        [Route("api/math/cosecant")]
+        [EnableCors("AllowOrigin")]
+        public double Cosecant(double angleInDegrees)
+        {
+            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
+            return 1 / Math.Sin(angleInRadians);
+        }
+
+        [HttpGet]
+        [Route("api/math/secant")]
+        [EnableCors("AllowOrigin")]
+        public double Secant(double angleInDegrees)
+        {
+            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
+            return 1 / Math.Cos(angleInRadians);
+        }
+
+        [HttpGet]
+        [Route("api/math/sinh")]
+        [EnableCors("AllowOrigin")]
+        public double Sinh(double x)
+        {
+            return Math.Sinh(x);
+        }
+
+        [HttpGet]
+        [Route("api/math/cosh")]
+        [EnableCors("AllowOrigin")]
+        public double Cosh(double x)
+        {
+            return Math.Cosh(x);
+        }
+
+        [HttpGet]
+        [Route("api/math/tanh")]
+        [EnableCors("AllowOrigin")]
+        public double Tanh(double x)
+        {
+            return Math.Tanh(x);
+        }
+        [HttpGet]
+        [Route("api/math/percentage")]
+        [EnableCors("AllowOrigin")]
+        public double Percentage(double value, double percentage)
+        {
+            return (value * percentage) / 100.0;
+        }
+
+        [HttpGet]
+        [Route("api/math/square")]
+        [EnableCors("AllowOrigin")]
+        public double Square(double num)
+        {
+            return num * num;
+        }
+
+        [HttpGet]
+        [Route("api/math/cube")]
+        [EnableCors("AllowOrigin")]
+        public double Cube(double num)
+        {
+            return num * num * num;
+        }
+
+        [HttpGet]
+        [Route("api/math/cube-root")]
+        [EnableCors("AllowOrigin")]
+        public double CubeRoot(double num)
+        {
+            return Math.Pow(num, 1.0 / 3.0);
+        }
+
+        [HttpGet]
+        [Route("api/math/power")]
+        [EnableCors("AllowOrigin")]
+        public double Power(double baseValue, double exponent)
+        {
+            return Math.Pow(baseValue, exponent);
+        }
+
+        [HttpGet]
+        [Route("api/math/negative-power")]
+        [EnableCors("AllowOrigin")]
+        public double NegativePower(double baseValue, double exponent)
+        {
+            if (baseValue == 0 && exponent <= 0)
+            {
+                throw new ArgumentException("0 to the power of a non-positive number is undefined.");
+            }
+            return 1.0 / Math.Pow(baseValue, exponent);
+        }
+        [HttpGet]
+        [Route("api/math/ten-power")]
+        [EnableCors("AllowOrigin")]
+        public double TenPower(double x)
+        {
+            return Math.Pow(10, x);
+        }
+        [HttpGet]
+        [Route("api/math/log")]
+        [EnableCors("AllowOrigin")]
+        public double Log(double x)
+        {
+            if (x <= 0)
+            {
+                throw new ArgumentException("Logarithm of a non-positive number is undefined.");
+            }
+            return Math.Log10(x);
+        }
+
+        [HttpGet]
+        [Route("api/math/ln")]
+        [EnableCors("AllowOrigin")]
+        public double Ln(double x)
+        {
+            if (x <= 0)
+            {
+                throw new ArgumentException("Natural logarithm of a non-positive number is undefined.");
+            }
+            return Math.Log(x);
+        }
+
+        [HttpGet]
+        [Route("api/math/fact")]
+        [EnableCors("AllowOrigin")]
+        public float CalculateFactorial(float num)
+        {
+            if (num < 0)
+            {
+                // Factorial is not defined for negative numbers
+                throw new ArgumentException("Factorial is not defined for negative numbers.");
+            }
+
+            float factorial = 1;
+            for (int i = 1; i <= num; i++)
+            {
+                factorial *= i;
+            }
+
+            return factorial;
+        }
+
+        [HttpGet]
+        [Route("api/math/sip")]
+        [EnableCors("AllowOrigin")]
+        public float CalculateReturns(float principal, float durationInMonths, float annualInterestRate)
+        {
+            float monthlyInterestRate = annualInterestRate / 12 / 100;
+            float totalMonths = durationInMonths;
+            float futureValue = principal;
+
+            for (int i = 0; i < totalMonths; i++)
+            {
+                futureValue += futureValue * (float)monthlyInterestRate;
+            }
+
+            return futureValue;
+        }
+
+        [HttpGet]
+        [Route("api/math/lumpsum")]
+        public float CalculateReturns(float principal, float annualInterestRate)
+        {
+            double monthlyInterestRate = annualInterestRate / 12 / 100;
+            float futureValue = principal;
+
+            // Assuming a one-time investment, so the duration is 1 month
+            futureValue += futureValue * (float)monthlyInterestRate;
+
+            return futureValue;
+        }
+
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+startUp.cs
+
+
+  
+
+  using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace CalDemo1
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CalDemo1", Version = "v1" });
+            });
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin",
+                    options =>
+                        options.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                         .AllowAnyMethod());
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CalDemo1 v1"));
+            }
+            app.UseRouting();
+
+            app.UseCors(x => x
+.AllowAnyOrigin()
+.AllowAnyMethod()
+.AllowAnyHeader());
+
+            app.UseHttpsRedirection();
+
+
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+    }
+}
+
+
+
+app.module.ts
+
+  import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { AddCalculatorService } from './add-calculator.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { SipComponent } from './sip/sip.component';
+import { TeamComponent } from './team/team.component';
+
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CalculatorComponent,
+    HomeComponent,
+    SipComponent,
+    TeamComponent,
+    
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
+    
+  ],
+  providers: [AddCalculatorService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+app.comp.ts
+
+  import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'scientific-calculator';
+}
+
+app.comp.html
+
+  <div><h1 style="color: darkgoldenrod; text-align: center;">Calculator World</h1></div>
+<header>
+    <nav>
+      <a routerLink="/home">Home</a><span>|</span>
+      <a routerLink="/calculator">Scientific-Calculator</a><span>|</span>
+      <a routerLink="/sip">SIP</a><span>|</span>
+      <a routerLink="/team">Team</a>
+    </nav>
+</header>
+<body class="body-cal">
+  <router-outlet></router-outlet>
+</body>
+
+
+
+
+<!--Folder name Calculator
+   ng new scientific-calculator
+ng generate component calculator,home,sip,team
+ng generate service add-calculator -->
+
+
+  app.comp.css
+
+
+  
+
+header {
+    background-color: #f78e51;
+    color: #fff;
+    padding: 10px 5px; 
+  }
+
+nav {
+    text-align: center;
+  }
+  
+nav a {
+    text-decoration: none;
+    
+    color: #fff8f8; /* Link text color */
+    margin: 0 10px; /* Spacing between links */
+    font-weight: bold; /* Bold text */
+    font-size: 20px; /* Font size */
+  }
+
+nav a:hover {
+    color: #ff6600; /* Change color on hover */
+  }
+  
+  
+
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1px 0px ;
+    
+  }
+  
+  .footer p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+
+app.rout.module.ts
+
+  import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+
+import { HomeComponent } from './home/home.component';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { SipComponent } from './sip/sip.component';
+import { TeamComponent } from './team/team.component';
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'calculator', component: CalculatorComponent },
+  { path: 'sip', component: SipComponent },
+  { path: 'team', component: TeamComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+];
+
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+
+add-calculator.service.ts
+
+  import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AddCalculatorService {
+  private apiURL= 'https://localhost:44337/api/Calculator/api/math';
+  constructor(private http:HttpClient) { }
+
+ add(a: number, b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/add?num1=${a}&num2=${b}`);
+}
+
+mul(a: number, b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/multiply?num1=${a}&num2=${b}`);
+}
+
+div(a: number, b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/divide?num1=${a}&num2=${b}`);
+}
+
+sub(a: number, b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/subtract?num1=${a}&num2=${b}`);
+}
+
+sqr(a: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/square?num=${a}`);
+}
+cube(a: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/cube?num=${a}`);
+}
+
+sqrt(a: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/square-root?num=${a}`);
+}
+
+
+sin(b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/sine?angleInDegrees=${b}`);
+}
+cos(b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/cosine?angleInDegrees=${b}`);
+}
+tan(b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/tangent?angleInDegrees=${b}`);
+}
+log(b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/log?x=${b}`);
+}
+
+ln(b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/ln?x=${b}`);
+}
+
+percentage(a: number, b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/percentage?value=${a}&percentage=${b}`);
+}
+
+pow(a: number, b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/power?baseValue=${a}&exponent=${b}`);
+}
+
+
+fact(a: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/fact?num=${a}`);
+}
+
+sip(a: number, b: number,c:number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/sip?principal=${a}&durationInMonths=${b}&annualInterestRate=${c}`);
+}
+
+
+lumpsum(a: number, b: number): Observable<number> {
+  return this.http.get<number>(`${this.apiURL}/lumpsum?principle=${a}&annualInterestRate=${b}`);
+}
+
+}
+
+calculator.ts
+
+
+  import { Component,OnInit } from '@angular/core';
+import { AddCalculatorService } from '../add-calculator.service';
+
+
+@Component({
+  selector: 'app-calculator',
+  templateUrl: './calculator.component.html',
+  styleUrls: ['./calculator.component.css']
+})
+export class CalculatorComponent {
+  result = '';
+  input1 ='';
+  input2='';
+  op='';
+  memory ='';
+
+
+  public a:number=0;
+  public b:number=0;
+
+  constructor(private addCal: AddCalculatorService){};
+
+  public add:number=0;
+
+  appendToDisplay(value: string) {
+    this.result += value;
+  }
+
+  addToMemory() {
+    const resultNumber = parseFloat(this.result);
+    if (!isNaN(resultNumber)) {
+      this.memory='';
+      this.memory += resultNumber;
+
+    }
+  }
+
+  recallMemory() {
+    this.result = this.memory.toString();
+  }
+  
+  
+
+  clearResult() {
+    this.result = '';
+  }
+  clearBack() {
+    if (this.result.length > 0) {
+      this.result = this.result.slice(0, -1);
+    }
+  }
+  
+
+  calculateResult() {
+    const matches = this.result.match(/([a-zA-Z]+)([0-9]+)/);
+
+    if (matches) {
+      this.op = matches[1]; 
+      const num = matches[2];
+      this.b = parseFloat(num);
+
+
+    } else {
+      const part=this.result.split(/([+\-*/^%!])/)
+      this.input1=part[0];
+      this.a=parseFloat(this.input1);
+
+      this.op=part[1];
+      if(part.length==3){
+        this.input2=part[2];
+        this.b=parseFloat(this.input2);
+
+      }
+    }
+
+    switch (this.op) {
+      case '+':
+        this.addCal.add(this.a, this.b).subscribe((data) => {
+          this.result = data.toString();
+        });
+        break;
+      case '-':
+        this.addCal.sub(this.a, this.b).subscribe((data) => {
+          this.result = data.toString();
+        });
+
+        break;
+      case '*':
+        this.addCal.mul(this.a, this.b).subscribe((data) => {
+          this.result = data.toString();
+        });
+
+        break;
+
+      case '/':
+        if(this.b!==0){
+          this.addCal.div(this.a, this.b).subscribe((data) => {
+            this.result = data.toString();
+          });
+        }
+        else{
+          this.result='Invalid Operation';
+        }
+
+        break;
+      case '^': 
+        if(this.b==2){
+          this.addCal.sqr(this.a).subscribe((data) => {
+            this.result = data.toString();
+          });
+
+        }
+        else if(this.b==3){
+          this.addCal.cube(this.a).subscribe((data) => {
+            this.result = data.toString();
+          });
+
+        }
+        else if(this.b==0.5){
+          this.addCal.sqrt(this.a).subscribe((data) => {
+            this.result = data.toString();
+          });
+
+        }
+        else if(this.b==0){
+          this.result='1';
+        }
+
+        else{
+          this.addCal.pow(this.a,this.b).subscribe((data) => {
+            this.result = data.toString();
+          });
+
+        }
+
+        break;
+
+      case 'sin': 
+        this.addCal.sin(this.b).subscribe((data) => {
+          this.result = data.toString();
+        });
+
+        break;
+
+      case 'cos':
+      this.addCal.cos(this.b).subscribe((data) => {
+        this.result = data.toString();
+      });
+
+      break;
+    case 'tan':
+      this.addCal.tan(this.b).subscribe((data) => {
+        this.result = data.toString();
+      });
+
+      break;
+
+    case 'log':
+      this.addCal.log(this.b).subscribe((data) => {
+        this.result = data.toString();
+      });
+
+      break;
+  
+
+    case 'ln':
+      this.addCal.ln(this.b).subscribe((data) => {
+        this.result = data.toString();
+      });
+
+      break;
+
+    case '%':
+      this.addCal.percentage(this.a, this.b).subscribe((data) => {
+        this.result = data.toString();
+      });
+
+      break;
+    case '!':
+      this.addCal.fact(this.a).subscribe((data) => {
+        this.result = data.toString();
+      });
+
+      break;
+
+      default:
+        this.result = 'Invalid operation';
+    }
+    }
+
+
+  }
+
+calculator.html
+
+  <div>
+    <h2 style="color: rgb(16, 101, 175); font-size: 40px;">Scientific Calculator</h2>
+</div>
+<div class="cal">
+    <div class="calculator">
+      <input type="text" id="screen" value="{{result}}">
+      <div class="calc-buttons">
+    
+          <div class="functions-one">
+              <button class="button triggers" (click)="clearResult()">C</button>
+              <button class="button basic-stuff">(</button>
+              <button class="button basic-stuff">)</button>
+              <button  (click)="appendToDisplay('7')" class="button numbers">7</button>
+              <button  (click)="appendToDisplay('8')"class="button numbers">8</button>
+              <button  (click)="appendToDisplay('9')"class="button numbers">9</button>
+              <button  (click)="appendToDisplay('4')"class="button numbers">4</button>
+              <button  (click)="appendToDisplay('5')"class="button numbers">5</button>
+              <button  (click)="appendToDisplay('6')"class="button numbers">6</button>
+              <button  (click)="appendToDisplay('1')"class="button numbers">1</button>
+              <button  (click)="appendToDisplay('2')"class="button numbers">2</button>
+              <button  (click)="appendToDisplay('3')" class="button numbers">3</button>
+              <button (click)="appendToDisplay('00')" class="button numbers">00</button>
+              <button  (click)="appendToDisplay('0')"class="button numbers">0</button>
+              <button  (click)="appendToDisplay('.')"class="button basic-stuff">.</button>
+          </div>
+    
+          <div class="functions-two">
+              <button class="button triggers" (click)="clearBack()"><=</button>
+              <button  (click)="appendToDisplay('%')" class="button complex-stuff">%</button>
+              <button  (click)="appendToDisplay('!')"class="button complex-stuff">x !</button>
+              <button  (click)="appendToDisplay('^')"class="button complex-stuff">x^</button>
+              <button  (click)="appendToDisplay('*')" class="button basic-stuff">*</button>
+              <button  (click)="appendToDisplay('/')"class="button basic-stuff">/</button>
+              <button  (click)="appendToDisplay('ln')"class="button complex-stuff">ln</button>
+              <button  (click)="appendToDisplay('2.718')"class="button complex-stuff">e</button>
+              <button  (click)="appendToDisplay('+')"class="button basic-stuff">+</button>
+              <button  (click)="appendToDisplay('^2')"class="button complex-stuff">x ²</button>
+              <button  (click)="appendToDisplay('log')"class="button complex-stuff">log</button>
+              <button  (click)="appendToDisplay('cos')"class="button complex-stuff">cos</button>
+              <button  (click)="appendToDisplay('-')"class="button basic-stuff">-</button>
+              <button  (click)="appendToDisplay('^0.5')"class="button complex-stuff">√</button>
+              <button (click)="appendToDisplay('sin')" class="button complex-stuff">sin</button>
+              <button (click)="appendToDisplay('tan')" class="button complex-stuff">tan</button>
+              <button (click)="calculateResult()"class="button triggers">=</button>
+              <button (click)="addToMemory()"class="button complex-stuff">M+</button>
+              <button (click)="recallMemory() "class="button complex-stuff">MR</button>
+              <button (click)="appendToDisplay('3.1415')"class="button complex-stuff">π</button>
+    
+          </div>
+      </div>
+    </div> 
+</div>
+
+
+  calculator.css
+
+
+  
+
+.cal{
+    background-color: rgb(233, 190, 141);
+}
+.calculator {
+    max-width: 560px;
+    height: auto;
+    background-color: rgb(236, 236, 181);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px auto;
+    text-decoration: solid;
+
+  
+    }
+    input[type=text] {
+        width: 400px;
+        height: 60px;
+        border-radius: 2em;
+        border: 0px;
+        background-color: #998e8e;
+        color: #fffefe;
+        padding: 0 5px 0 5px;
+        margin: 10px 50px 40px 50px;
+        font-size: x-large;
+        text-align: right;
+        
+    }
+
+    .calc-buttons {
+        display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+    }
+    .button {
+    margin: 3px;
+    width: 60px;
+    border: none;
+    height: 45px;
+    border-radius: 2em;
+    color: #000000;
+    cursor: pointer;
+    font-size: 24px;
+    }
+    button:hover {
+      background-color: hsla(112, 91%, 32%, 0.3);
+      transition: .2s;
+    }
+    .functions-one {
+        width: 210px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    
+    .functions-two {
+    width: 280px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .triggers {
+        background-color: #ffc266;
+    }
+    .numbers {
+        background-color: #4e4a51;
+        color: white;
+    }
+    .basic-stuff {
+        background-color: #80d4ff;
+    }
+    
+    .complex-stuff {
+        background-color: #24a4c1;
+        color: white;
+    }
+
+    h2{
+        text-align: center;
+        color: tomato;
+        font-size: x-large;
+    }
+
+
+home.ts
+
+  import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent {
+
+}
+
+
+home.html
+
+  <div class="container">
+    <div>
+        <h2 style="text-align: center;"><a routerLink="/calculator" style="text-decoration: none;" >Scientific Calculator</a></h2>
+        <ul>
+            <li>Basic Arithmetic Operations: Include standard arithmetic operations like addition, subtraction, multiplication, and division.</li>
+            <li>Trigonometric Functions: Provide trigonometric functions such as sine, cosine, tangent.</li>
+            <li>Exponentiation and Root Functions: Allow users to calculate exponentials (e.g., x^y) and find square roots, cube roots, or other nth roots.</li>
+          
+            <li>Memory Functions: Include memory storage options such as Memory Plus (M+), Memory Recall (MR) for convenience in complex calculations.</li>
+            </ul>
+      </div>
+
+      <div>
+        <h2 style="text-align: center;"><a routerLink="/sip" style="text-decoration: none;">SIP</a></h2>
+        <ul>
+            <li>
+              <strong>Regular Investment:</strong> SIP is a disciplined way to invest in mutual funds. It allows you to invest a fixed amount regularly, typically monthly, in a mutual fund scheme.
+            </li>
+            <li>
+              <strong>Rupee Cost Averaging:</strong> SIP helps in mitigating the impact of market volatility. When the market is down, your fixed investment buys more units, and when the market is up, it buys fewer units. This strategy is known as rupee cost averaging.
+            </li>
+      
+        </ul>
+    </div>
+  </div>
+
+
+home.css
+              .container{
+    background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBQUFBcVFBUYGBcZGhoaGhcaGRkgGhoaGhoYGhwYGRkdICwjGh02IBkaJTYkKS0vMzMzGSM4PjgwPSwyMy8BCwsLDw4PHhISHjIpIykyMjQ6OjIyMjI0NDIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjoyMjIyMjIyMv/AABEIAJoBSAMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAAAAgMEBQYBB//EAEEQAAIBAwIEBAQDBgUDAwUBAAECEQADIRIxBEFRYQUTIpEycaHhQlKBBiMzYrHRFFNygvBjssFDg6JzdJLS8RX/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAQIDBAX/xAAnEQACAgICAQMEAwEAAAAAAAAAAQIRAyESMUETIlEEMmFxgZGx8f/aAAwDAQACEQMRAD8A+vUURRFUNAooiiKAKKIoigCiiKIoAooiiKAKKIoigCiiKIoAooiiKAKKIoigCiiKIoAooiiKAKKIoigCq6ISzFhHTMYyIke/61YiigI/L7t7k/1qG0TqZQzY5nTknfkOc+1WopQAJMfM/wB6EEF8lYYsMfy7jmPi7T+lZF7xl/MIt2wxX4mLkKNsEaTLQeW0iTmKTxjjTcbybfYkmIUfmIPPfSD0JOBmBbUFbNjLEZYk6Yn1O3UT+rMfmRSUvCNoQT3Lo2vD/EluHSV0PE6SZBHMqfxD9AeoFX65fj+CuWfXrZ0XJuQoe2R+I6RBTqYxzlZI1fDfEtcJcgPyI+FxvK9DGdP6iRtZPwyJwVXHr/DT0jpSvbDb/wBTT1U8T4ry7ZbM8h/bv/epMypx1z1C1aGp8kz8CiQdT9cjbnkcjHnEcOAha9cuNtOk6RM4VUTfJwDqJJ51LwlkWbZNwjVGq452mM5/KBgdhSoheLlwED/0rZ3WRGth+cgnHIGNyazlMmiHhrl23LPLq2WWB5iDkRpH7wxuAP8ATOx17V1WUMpBUiQQZBHUGqFxwAWYwAJJJwAOZPIVTsXHQm4ohHYAWohmn8Y/LcO+naBJgyVjHNy7JnFRN6iiKrcbxPlrPPl/c1qVIvEeNFsQMsdgBJztAG56CisexwjXz5jEggn0ESQCCNTLPxkGRMgCMGTRWPqr8/0TR0nljoPajyx0HtTUVsQL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAL5Y6D2o8sdB7U1FAIUXoPao2ZMYBmOnPb+9TsOlRWrWmRy35TPOhA+heg9qwvGePA/d2wpYzyxHNm/lH1MAda98a49ra+WhLXGaBkA/6RAxjJMYE7mAc+3ZVFLO0uxlycAAYgzsByH6nJJNJypG+LHbt9Edq1oARAXdzid2Y5LMQMCBJMYCwBgCtdx/g7LOF8xyV1tIUScamYzotqOxgCc5NZKXFeGt3BqUyGRgdJyMxgjkQcHNa/DeKs6MgRfPCkqjMVt3I2ZWgkLkahBKzzEE0x1/Jp9Qpar7Su/HPae2b90Pdu4tcLZUQZIlyzSzBRvcJVQOUxXniXhPly1pS1uZa0u65nXbjO+dAzOVzgngH7OnhX8wuty44i4xWNOSwSwPwWwTGjbngzL8b4i9wPbtcPeNxGKqxNtVRwPS7Mbk6CCDhTIOxyK1as5oycXaPOA8RDBRcYGRCXAYDkkAB4wG77GeRwZvGrM22ZZBtsCJggn0kHaYkj2pPE/CTl7Sgk5uW/w3OpWcK/zgNzj4hX4HxPSAHZikkamJm3GCt0MCcHEnI59ahOtMu4qS5L+i5w3EDiNNwiLawVQkSzg7tHJWGB1E/li07yZNUbnAPbZrlrKknVb9IDj8wj4W3zz58iqreF4HdbS/xNWCSBJtnooBBY89tiaxlCTdeCIyjFWOWFz9438JTK/wDUIOGjms/CB8Rg/lm/wnDknzLg9UelT+BTy7seZ+QG0leFslyLjCFH8NCMj/qMORjYfhB6mBfJit4xUVSM9yds80L0HtWfxHF8OyNqZCqnSeurooGSekTMHoayPFPEHvv5NkHTPruSQojcahktvIGQByJkHDcIqHX8TqvxECQW+FVUYUAEYHTM1EpJGscbZNcttZgoSbZHpdclARy3lNjGYgESAACm8F4pA9zhQwdVAYZkKTOu33AO0bTGIFFU9NPZRp2b+jufejR3PvTUVqQLo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FALo7n3o0dz701FAQ3cA5M8s89qy/E/EPLWA7aiAR8JOdhAj1HlnkTyq54nxaW01PGMieXKfrEczisXgrGTxF4GSToQn6nlMATyGwxJaJSotGNsk4Ox5Q867m6/wrMhByGeU5nmc9AMZgl7iCLzlbasQGwYfSp1GcCSx9RGAsY1E1dfxS075u2yxMRrXfoM/SqfF8MyuXRdQaNSiJDABdQkwRAAIkbSJkis4SXL3aNsuOXp+zb8/r4F8Q8Pe24DQHH8O4Bg/Lt1Q8uuDVy0Rdto+RIVwQYZWIkFW5ESc/8AjFU3uX7lsWfUtsGdTgSsclzqMchEd4GmtG2gUBRgAAAdhgVOeadfJP0eOSTtUn4ZYt8VccqpuC3eEi3cK6rV0H8LoCvrwDAYHcqfiUPwr2+Ed34zjLRvXdJ9RS0gRJCrbts5MSxkliST+lVHthhBEg/8/Q9xQzK4VL7Qyn9zxMDVbc4CvOD0k+l9mzBZCd6ZGbA47j0e+JeM2Lvp4M+dxLQEe1LJbMiGu3F9AtjcqT6hIANafjPAKQ15WVHUSxbCOqjZ+hjZtx3GK0eHDKi+ZpDAerThJ5kTkD57Vz/GcX/iGBH8JTKD/MYbXD/L+Uf7vyxaTSWzLHGUpaPfDeONoKDqFsx6edqY5flE5H4eWBFbLeGWy+sqZxOTDRkBhsYOROxrH8P4Xznz/CVsn/MdTOgfygj1dY059UdIGBnO29IXWyc3HloNPc+9c54hxZu3HsB4UaYVSZuA7lm5KNtIzlSTBAq34v4lH7u2QWbc7gDqeo5RzOOpGM3DkAaGh1JIc5MkQ2oY1SCQf0iIEROdaJxwt2y3dv27SyxCJ8CAD8CjIVRuTtA6msh+IvcRI/h2y0nPqbszDln4V/UwYprXBS4a8+tzIX5DJAHIc4H6yarcMGe5pUlUQ61KuCVDeYrW3UrAMgkDMTHIVh2dBp8Lwi2wNHpYbMMEfLoO23zoqeioshxT7Oqg9fp96IPX6femorrOMWD1+n3og9fp96aigFg9fp96IPX6femooBYPX6feiD1+n3pqKAWD1+n3og9fp96aigFg9fp96IPX6femooBYPX6feiD1+n3pqKAWD1+n3og9fp96aigFg9fp96IPX6femooBYPX6feiD1+n3pqKAWD1+n3og9fp96aigFg9fp96jvuUUtO3b71NXjqCIIkHlQHIeYbtwu5lUYhQMSVwze8qOkE8xEHi91rr27USHkaMAEAooQz+H1yeukDnWj4n4a9pjctyynLW+p6qTs2PkexzWZxNoXVV7ZGpSdMyOY1I2JQyo5SCoxuDl9sk30dVKWJ8ezQufs6xtIAq+ZJ8wM7FCp1QIgj8vLlWd4RcJRlP4DAkyYKq0TzjVHyApHv33trZNkkK7MGZ1gzrgE6iY9XQ7DFWuB4Xy0iQSTLECBO2ByAAAHYVbLJONXZT6XHOM7qlRYqn4nxDIgCfEx0iIkelmJAOJhSB3Iq2xA3MVV8Q4cuo0/Ep1DlOGUieWGMd4rCFclfR25b4Pj3QW/wBnVZRcNy2U0FzeyWBAyNROqAd2kHBEA1F4dcLBrb+rSAQW3KNqADdTKsMjaJzNTWfHnRUQWwFVdJtFHlyeZ9Jj9NQMmScGk8O4dl1O40lohfyqJIGJAyzYBMCBJiujK1x/w8/6ZS5+a83ZZcOV8pnJtfkIyR/ls8+pP5YzsSRipeH4drzFEOlR8dwfhnOhf5zv2BncivLdtnfy7eGiWb/LX83dsHSDuQeQNdJwnDLaQIogD3J3JJ5kmST3rOEXLcjfLkjC4w7IrPB6FATSIwoCwAADCjOMn6Vm+JcY1sKimWMgLO286oxzBJ5fMidDxTxAWl6scKo3JO3/ADsTsDXPKpku5lzueQH5R27896vOVHPjhyYtpAgyRJySYEwOQ5KBy5D3pRxaFA6nUDGnTksTsAOv9NzAzVHjOKlg2gkWy8Ax6mRlQlWBkEExBGdYweUnDIBPp9YAARSP3auSJJ214JJ5AQJ/FhXlnRfhEN2/cBbT6rsIWI9SqpZgLawZiVMvBzuBgLrJMZAB5gGR7wJ9qrcHwmgkltR2BxOkBQJgAT6RmOgzAq1UNkpBRSvcAIB3bYfIST8u/wAutFQSdZJ6D3+1EnoPf7U1FdhxCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1NRQCyeg9/tRJ6D3+1LeuBAWP/ADtWMnGXLhLB9CDIIEzty/ENgBu2qRI3EPRtmTyHv9q5/wAU8JdWN2yAD+JSTDAdcYMYDcucitfhOKD4OHG46wYJXrnB6exNuoasmMmnaOQsXw4xIIMMp+JT0I/4CCCJBo4m8LaO5EhVLR1gE1qeK+E6j5lqFuAfoRvpYc13xuMkRzxgwuK9t1KtBV0nMMCJB5qcwfeCCBhKHF/g9DHm5qvJX4TwnzldiyvfU5tsBBX+Qn4RO0YGAcnVUXCxbuIqK6K0I9tyPTcCsxZQPgGI095jr4HuW9IZCLiMWF9A5LgiIhQQo5lT8oO5sIbl66LtxdMAR6dJYhSoOncCGb4skkclFdEnHh+DgxRyeotO/JfpYZmCWwC7bA7ADd2jZR9ZAGTQ7HAUamYwq9T8+Q3JPIAmt7wvgBaUydVxsu/U8lHRRyHzJyTXPCHLb6O7Nl4Kl2PwHBi0mlcmZZics3NjjsMbAAAbV54hxotIWaOwk5Pyif057VPxXEqiF2MAZ9s1y9y611/Mfb8Cnly1EcjvA5DuTG0pKKOKEXJhLOxuXPiOw30g8vn1PYD5w8WpI21IQQ6jcgjdepGcdCeYANiiudu3Z1JUqRh3ty49ZiA+NYB9GolV1G4GhQIJWZOTA0OG4WW8y4ql8BWKjUFic4wZJ2qT/CrrLkAn0x6R6SJ9U8ztn+VelWKNkKIUl66EUsfYbknAUDmSYFPVLidQuAkjkLZPw6jOoN0YjAPzAyYaES2V7pYOA6NqYFlZWIUFSpW1qGwguTIzEjopUYCKpHr8rV6x8TM5mUWM6AQZjHpgAKGr2rFT6Fq7GjV2NNRXScoursaNXY01FALq7GjV2NNRQC6uxo1djTUUAursaNXY01FALq7GjV2NNRQC6uxo1djTUUAursaNXY01FALq7GjV2NNRQC6uxo1djTUUAursa8e6ACSCAKYmMmsPjOJN5/LSdI3jc7YBGxyM7KCCYkUIEv3WvtABCAkQfxRuJ6ZEx3GYatC1ZVNmJmJJjB5x+uY2E4gYpbNpLa7QQIJ2WBnacAQfkOdeHhReEuvoj0qef87A/QHYGTnYU+5nvFWVmVmRGxgzsDPKOucahzqXh+Nk6G+KSAYjV/ZozHTPUCiLrWGC3M2xs/5R/N1XvuOeMizxNvWQYG/0zj+ny33AoNxZo6uxrK8V8LW76lBW4JKsAJzvvggwJBwYHQES8NxZB0XN9g3I9j/4PcTB3tXHk6cwPijfsN5o0XjLyjk+H4gk6HGlxPWGAwWSeXUbjniCZbjhROTyAAkknZVA3M8q3uM4SzcADiI2PqQgjYgiINR+H+G20YuC1xgYVmIOkQJ0hQADkiYnlNYvFs619VUaa2J4NwuiXcTcYcoIVDkKh5jaTzPbSBp3LoUEkEAVn+KW/wCGuYNwRDMpyrysqQYmDFZv7QcIg4d3C+pSm7MY/eIDudiJBHcitqpHI5Ny35K/Gcb5x8xiFtLlZODGzH+WYjqc9KZWBEgyDsRse4POq3FuPKLMGICh/TGqVhgVBxIIBE4xVDgeLuFDotMBqJJby5BJkg2w4C/LV161zN8tnWko6NiluXFUSzBR1JAH1qj+8PxrePYGyg/Qrc1f/KvNYQjTw7B2kAny52yWYOW0jmc+5ANaLWTnig+pbZBcAHIbTBMD1QAdjGeVe8FeLBtUyrRldJ+FSQR1knbG3zo4EqVBB1FgrsTGqXAIkDbGw5AACrNAiK7xKIVVmgsYEzE9J2B6Dnyo+NWDLG4hoz7cq84yzrQrid1nbUMicHHI9iae1aVBCiBJO5O/c0JIODsOAGuQHGJViZXkHJA1Qeccp5mvKt0UFHVax1o1jrTUV1nELrHWjWOtNRQC6x1o1jrTUUAusdaNY601FALrHWjWOtNRQC6x1o1jrTUUAusdaNY601FALrHWjWOtNRQC6x1o1jrTUUAusdaNY601ZfifGn+HbyxmY5Ab7Zgc4zkAZNAQ+IcbrPl2zjGpuQzjO2TgTuewNT8NwYTSIyCCO2+fnkyck6jkiouB4RQoaQ2onODOIJPflGIAURir7WzqAJqDOTsr3lYvBRmTchdOWnGrUR6efcx0zMOKciRaeO7Wv/3NTADVED55/vQrrkHSAPY0sJlW/cuMubQg7TcA/XCmKg8NsXLROoLpxoQEnTvMHSIG3pjH0q03H2wuXtiDsWH96U+JWzENbPyMn6UDZ5cshjkZgiMcxzkZHbbbpUHD3TaYq86TzyY3P6rv3EZEZFg8YAeZPUW7h+oWomeTOi4WiJ8t+oONQ6gH9BNSQtGiHHUe9V1AZ21ARykA/X/m9VOCa4jBfLfy5iSUGnvGqY2kfMgDatWhonZzfjHExctIAQvm2wTJxLAA6Z2zvy/Wp/2gWeGu9QhPzCw0/Sr3i9oG2GIyr2mH6XUP/iqnjSTw91f+lcg/7Dg1K6M5P3Ix7SBrYB2KgH5EQais2taq0lbgGkuNyUJUgjZhIOD1xG9ScA4a2hBkFRBGxHUUttgj3ATAxck7AEEN9UJP+quRHonjcUUxcXOwZASHJ2UDdWJ5HHc0cCwabmoMxwYyFAyEU8xkGeZM9APbKlyLjAj8inGkHdiPzH6DHNqLHA20driiGbfpmJj/APEY9okzA2WERVEKABJMAAZO5xXtFFQSFFZ96wbjeYkBwAIbBWDKnElcHK/iDZiBWhUhMKKzeK4kgtJOiQrLIV1llCm2QJbUCTk/qCDHtKIs7tmj/m56CqyXi8FZG0jpnM9cbfOob/F27bgXJ1ESAEZgoJI/CDkwfaoE42x6CLltTABDQuYjIaDHI/p0rrOLZsUVDZdWEqAesQfqP61JoHQewoSNRS6B0HsKg1c4GSeQMASABHWOdAWaKqpdnZVJ7RG0wO+45bGpbZUzgSMHGx6TFCCWil0DoPYUaB0HsKEjUUugdB7CjQOg9hQDUUugdB7CvE0naD+goB6KXQOg9hRoHQewoD0tFQvfjYdfoQMDmZP0p3tgjAE7jHMVk8fx9q3lhMkekDOqJiBkn9etAXCSwgM2qfVAPIchAgbbxzquOAVSzB3TVBOQTABAGBgb4k5JqPgvEldlTQ1s7AOLYDH+UqWGqJMGJ71ptwykiRMfLPzxUJhxa0ynb4ZSwUm73m44z0OkgZ396lTw1JltTbbu525mWOauBF6D2FGgdB7CpIpFf/8AzrP+VbPzUH+terwVobW7Y+SL/am4i4ltSzwANzAqlbe5cyFW0nLUs3COsYCD5yeoFQ3Qo0kQDYAfIRTTWM3EXFcqgS6F+MsApn8ikektGcgAYBOfTo8NdS4upQOhBEFSN1YcjRSTFEt1oU5+XzqNWJhsASSc7coP6zNOwUbge39hSpoOBpk5jE+1SBhdWAZwdu/ypyaguWUADGAF+nL35Vh3FN+5G1tJB6yY9CneY3bkDAycVnNRVslKzd4i0t22yasMCJUiQe2CJBrOv+EXHDK3EXNLSCIt7ERyQcqku2iD+7UKcDQAACBsNsHuPqNrvDsrLsJGGBAkGMgjl96QyKfRDj8nLX/D24aAoLLkkAYIySy9G/l/F2Mk1OOhkF1Br0Z08mEgkEblgVkDqu1dtcsKwhlBHyrn/EPDGtsXtxncbBuzdG6N2g42rOHlG0MnhlWw7MoLLpJ5BtQ/RhuP0p6W1cDCR8iDuD0I6/8ABIoumFJmIBMkSBjeOdYHQesYycDmelVBd80K1s4jVrkEA7aCoPq7gxEbzEDecyIVKqwMtnDActjp1bz+GRvtVi1YVZIABJJJgTkliJ6STjvTojsdMDIg7kDOecYk1UtLNt4uEEzJgjy2OTCn1LvMHqORpOJ1O+hYR4PqLETbOmdMb535iMEagap8Kz8SyoilWZV1kyAAs+sryySADkwJgAkTRFk3CcM/FOqA4QQ9yADpPz2cgAxsN42BK6jh7Fuzb0JhRlmJ3O5Yn6/aitOKK22V+JsLd4kFtYglSA7LKpb1bKfz3QZ7V7x/hqpbdke4CFJA1BgSBgHWCd451S/xNxeKkXECM11ZuAQsEbEFSSfLG5Ne8b4pxTIVbhDGpfWjFgVVwfwI0SB9au6Zz7TB/CnBmLTHroKH39Vei3fTYXP9l6R7OVH0quf2mVMXbVxD/tH/AHlD9Kt2/wBoOGYbsvzRyPdQR9aro3pMB4hfTc3fk1oOPe2v/mkXxlhGprR7MChjp6iTP6VfteJcK+FvJPTUs+0zVvygwwykd/vU7+StRKFrxWYJtmetu4D7BgBFWLfi6D869jaJ+tuRSv4VbOfKQnqAs+65qFvCkH+Yv/uXP6MSPpU3IcIvovr4va53EHYuFPs+mrovKRIIPyIP9K54+HNyut/uVCP/AIhT9arv4W+8WmPUqyH39VTyZHp/k62iuTFq+mwuf+3eJHs5UfSvT4hftgl3ugASddtWAA5lra/+acyrxs6e9c0iQJPIdagsXQPzbCMTgbbTPzrD4fxl3AZTbuAE7F1zkQfU0HflV/w7jRcZrbqFIgqNZIMySAYBBET8j2qVJPRVwa2aq3FOxHy5+1PUDWf9w6MTP6H+/vVTiuJS2pMsCJ9Oo4gTmTpAjnUkEviXGraQliNvp1+3Oa523b3v3fSQDoUx6V3LMT/8jtyHMmJHe63mXJiZRTv2dh16DkDJzto+GcH5xDt/CWNAP/qEHDn+QHb8xk7ATk3ydI6FBQjyfZA3C3ntm5oBU58sgi4V31jMKeYSJjmDirfhfi4gK7Spwtw7g7aLs7GcSeeDB3ZfE71/PD2wluTN+9gECZNu0p1NkEespsd6iuWLfEp/iOFIbUSDyt3gvpLCcTuA4w2xkQRfjXRT1Oepf8OiJpFuA7bdeXvXNcDx2mVbUVHp9ROq0wA9LLzXbOSAQcqRG0CGXeSyhZDEjIO525zUp2Zyi4umVLY8+6Wb+HbMKvJnw0kcwJB/1f6as8RcZm8u2YaJZ/8ALU8+mo8h8zkCDn8FxDIGsqP3mtiJ2CuxPmMegJZY3JAGxkX7ai2ugEnMs53djuxP/IgAYArKcq7JSb0jxEVF0J8I9z1JPMzJk9aq3mYXB5UeZA1zOnRmBcjcnIXmMnbUDLxF4ghUgu2wOwA3Zv5R9TA50tjh5m2hO83bs+okgYB5ORG3wrER6arii2+TJySSXFFyxfN0BgpABIPUMDpYA7HmJGM1Pb2JPzgzj9TTJaVQFUQAIABMAdKGC7E7zjUcjnie9dBmYPHcU95xatsFgFmbeBsDHMknA5RPY2ODQ2VAYxBAVZLRMCASAWJMnbdj86i4rhChNy161DetJyGAiQZ9LgGNxIMGMETcNxhcglpk+gwBlRkHAIbBJHLOwieXNy8l0Xbjtqk4PKo7wbVqGG22wR+UjmP6Ul7iH8xVCHaSxwsZwvMtOnBGx3qe6zagTg8qw5NW032TRNZvapBEMN1PLoR1Xoe3XFSsoIg5HSqPEIzEEyG/Cw3E8u46j7EN5jToIKvAOCYImCVJ3/qPYntx5FK0UaozfE/CiD5iGCOfb8rjmu8Hce85ZC3PSwZWXddTAieYKkalPI7GOoIHYaMZnvk1i+J+FKQHQkESQQZ09YGzL1B+4ThZpDJWmY3DWRatjWzelQCS7sIGJAJ7DYTyosXyX9QYFh6VjAgaoJ5vGTyAEbjMgbVNu4omMjdWX8y9R9RieRONx6smtGDFZ1KSwloBU7GZI9Jncb5ktj+zf9FviGLFbFoamJOT1/ExPIZy3eOYFdJ4fwK2E0Lljl35sdv0HKOQx1JyP2ei2zW7i6L5OZ5jJCoegE/6ssJzFrxDidU21JCgw7Dck48tO/IkdYGSdOqjx7KclLa6E4viPNIVQSkwAN7r8lH8ggnoYn4QdRWx4V4doGtxDkQADhF/KI54EntAwKKtxZnLJswWXzLZn8Yn9Wz/AFNY7+AEDWjFbhUAhTpUN+cMAGgZxz6c63hRWF7s6K0Yv+E422ALfFvAAHqZmJwQZViVGTq/SIrx7fFGPMtWLvqM67VpiFzpMgIZ2k/StuinNleEfgwrrBQTd4VdI/y3vLP+31Cewmq/D8GGtvctsqFOenJi2rnKspyWweg2zW34qYsyMHUuf961LatKbagqCDbEiBB9I3HOluiXFJmbYF4CVvOoJhdVwnVHQPI3mOoE1Nw/i3GDAcsJKguqkMVmY0FT+E7xVzhLShFAUADYQIGTyqlwO9vu18nuZGT1om/kJJ+C0n7Q8QPitI8EgmGXIMHk3Opl/aVPx2GH+llP9SP6VmeBMdNzO125Hb1NUXEoGseoBv3p3E/+qRz7YqebscEb6eP8Mebqe6MfqFj61D4p4tYNm4Fu2ySNMa1DeohfhJnnVDiLS59I36Cso1Kyb6JcNPZ0Q4vhBZtB2m6La5tZuKSoJUsPSMk4Yx2qv+yfE3Lr3NaqHFwlSG5KqqCwjfqFkZO1Y9rlXXfsugGqABm5y/6hq8ZWzBw4x7NV76+rWT6fwjE9omT+vWuddv8AEvqJAtpMdGgjIHNQRj8xzsM2P2l+G5/p/qBNe8SoFpIEYP8AWrTZOGKbIHSQQdiCD8jV/wAM8S06bV0jkqXMANsAj8lfYdG5QcV88a63+HNzUfMz65Orf829ddGq3nMrmczjn1rOuHRu2s0W6qhvFPBb3E3rgC+XwwI8y0WI/wAY4gnVp/hpynd4yNMVv3vELVrQjzbLL6UCMYCgAgaARiRt2qDw26x4WwxJJKWpMmTkbnnTeMfHw3/3Cj9DbuSK2OEpW+GbiFe4oZHVytu5cRlN22ACBcQgNp1F1DEA+nUMMQa/B8W9tihWApBe0RLJn47f5lPq233EEEHZ8euMtklSVOpcgwd+orO/aL4uHPPW4nnGgmJ6YGO1RLWzXG79j6LvFcGLgF2ywDxhhlXHRhzHbkehzVdPEJGkqRd28uck9QYymPijEGQCIp/2f+O6OUqY5TAzFR+N4u2SMHWBPOCBInvUSgpUyt8W0S2bLA6VM3XgvcjCrkCAdhuFXrJP4q1eHsrbUKowPck5JJ5kkyT1NUPCd7nd2nv+9K/0AHyFalX60ZozvGPFE4dCzH1HCgZJJ2AHMnkK55LFy5+8uFlJjSASLmT6QGGbaxqMD1HmVnTUl7PFcVOdKppnOmWM6ek9q0z8a/6x/wBq1nN7o6ccVVlVLi8M6sIFssllkA+Jtg6jmwYweZU/yirvG8AVJuWoOxZD8LRt/QQeXcYri/FmJu3JM6Ulf5TLZXpsNulfRuC/hp/oX/tFI+5bKZFTMfheOGnMgLOT8Sn4j5m+Tn1ZDRM5Aqx+9a4Hcwmn0qAQTJmWB2YYHXfaYqjx+OJWMSGnv6Zz1zmtSz/DT5sP0nauWcXvZX4JburGr9P+daXibTGNW/IjcHqDyNZngnwXP/rXf6itS9y+QqHGm/4CAMwOltIcj0vGG7dm7fqJyA72TiIECNzzOf8A+/OqnHfw27KCOxxmtK38I+Q/pXXCbkVaow/FPCSwBWZkHEzqA+IH8JJJ7QI7VydzjAOItLfBVTdVQwRiHKTcICgEzICkZ3nbb6VXO/tKgi4YEi0SDGxxkdDVpRRaMn0VPGHXiAJXQq5F0mLkbkD8gwDJkyBhSARqeDeHaYuOumP4aH8A/MR+cyfkD1JrL4bL2JzLrPfHPrXWVEN9kzXHSPaKKKuUP//Z);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .container > div {
+    width: 35%;
+    padding: 10px;
+    border: 2px solid #ebc14e;
+    border-radius: 2em;
+    background-color: #ecdcc4;
+
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #007bff; /* Blue color */
+    text-decoration: none;
+  }
+  
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  li {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+
+
+  sip.ts
+
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+ 
+import { AddCalculatorService } from '../add-calculator.service';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-sip',
+  templateUrl: './sip.component.html',
+  styleUrls: ['./sip.component.css']
+})
+export class SipComponent {
+
+  result = '';
+  principalAmount = '';
+  timeInMonths = '';
+  annualInterestRate = '';
+  a=0;
+  b=0;
+  c=0;
+
+
+  constructor(private addCal: AddCalculatorService) {}
+
+  calculateSip() {
+     this.a = parseFloat(this.principalAmount);
+     this.b = parseFloat(this.timeInMonths);
+     this.c = parseFloat(this.annualInterestRate);
+
+     this.addCal.sip(this.a, this.b,this.c).subscribe((data) => {
+      this.result = data.toString();
+    });
+  }
+
+}
+
+sip.html
+<div class="calculator">
+    <h2>Investment Calculator</h2>
+    <table>
+      <tr>
+        <td><label for="principalAmount">Principal Amount:</label></td>
+        <td><input type="text" id="principalAmount" [(ngModel)]="principalAmount"></td>
+      </tr>
+      <tr>
+        <td><label for="timeInMonths">Time (in months):</label></td>
+        <td><input type="text" id="timeInMonths" [(ngModel)]="timeInMonths"></td>
+      </tr>
+      <tr>
+        <td><label for="annualInterestRate">Annual Interest Rate (%):</label></td>
+        <td><input type="text" id="annualInterestRate" [(ngModel)]="annualInterestRate"></td>
+      </tr>
+      <tr>
+        <td><h2>SIP Amount after Investment:</h2></td>
+        <td><input type="text" value="{{result}}"></td>
+      </tr>
+    </table>
+   <div style="text-align: center;">
+    <button (click)="calculateSip()" style="text-align: center; color: white; font-size: 30px; border-radius: 2em; background-color: rgb(39, 141, 195);">Calculate</button>
+   </div>
+  </div>
+
+  sip.css
+                          .calculator {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 300px;
+    background-color: lightcyan;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+  }
+  
+  table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  table td label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  table td input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  table td h2 {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  table td input[type="text"][value] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  table td button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  table td button:hover {
+    background-color: #0056b3;
+  }
+
+  team.ts
+                          import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-team',
+  templateUrl: './team.component.html',
+  styleUrls: ['./team.component.css']
+})
+export class TeamComponent {
+
+  teamMembers = [
+    { name: 'Aakangsha', quote: 'Innovation distinguishes between a leader and a follower.' },
+    { name: 'Dipankar', quote: 'The only limit to our realization of tomorrow will be our doubts of today.' },
+    { name: 'Poulami', quote: 'Success is not final, failure is not fatal: It is the courage to continue that counts.' },
+    { name: 'Shailendra', quote: 'The only way to do great work is to love what you do.' },
+  ];
+
+}
+
+team.html
+                          <div class="team">
+    <h2>Our Team</h2>
+      <div *ngFor="let member of teamMembers">
+        <div>
+            <h3>{{ member.name }}</h3>
+            <p>{{ member.quote }}</p>
+        </div>
+      </div>
+  </div>
+
+  team.css
+                          .team {
+    text-align: center;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .team h2 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .team div {
+    display: inline-block;
+    margin: 20px;
+    padding: 15px;
+    background-color: #83c1ed;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .team h3 {
+    font-size: 20px;
+    margin: 0;
+    color: #b10d3e;
+  }
+
+  .team h2 {
+    font-size: 30px;
+    margin: 0;
+    color: #c4a20b;
+  }
+  
+  .team p {
+    font-size: 16px;
+    color: #000000;
+  }
+  
+  .team div:hover {
+    background-color: #f0f0f0;
+  }
+  
